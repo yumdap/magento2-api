@@ -1,0 +1,44 @@
+{
+    "name": "yumdap/magento2-api",
+    "description": "Provides access to the Magento 2 API",
+    "keywords": [
+        "yumdap",
+        "magento2",
+        "api"
+    ],
+    "homepage": "https://github.com/yumdap/magento2-api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthias Niess",
+            "email": "mniess@gmail.com",
+            "homepage": "https://niess.space",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.0",
+        "kitetail/zttp": "^0.3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Yumdap\\Magento2\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Yumdap\\Magento2\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
