@@ -100,6 +100,22 @@ class Client
         return $response->json();
     }
 
+    public function createOrderComment($order, $comment, $notify = 0)
+    {
+        $order_id = $order['entity_id'];
+        $payload = ['statusHistory' => [
+            'comment' => $comment,
+            'parent_id' => $order_id,
+            'is_customer_notified' => $notify,
+            'is_visible_on_front' => $notify,
+            'status' => $order['status'],
+        ]];
+
+        $response = $this->client->post($this->url("V1/orders/{$order_id}/comments"), $payload);
+
+        return $response->json();
+    }
+
     /**
      * Get all shipable items off an order array
      * @param  array  $order
