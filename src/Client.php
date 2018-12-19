@@ -61,13 +61,13 @@ class Client
 
     public function invoiceOrder($order, $notify = true, $capture = true)
     {
-        $orderId = $order['entity_id'];
+        $order_id = $order['entity_id'];
         $payload = [
             'capture' => $capture,
             'notify' => $notify,
         ];
 
-        $response = $this->client->post($this->url("V1/order/{$orderId}/invoice"), $payload);
+        $response = $this->client->post($this->url("V1/order/{$order_id}/invoice"), $payload);
 
         return $response->json();
     }
@@ -81,14 +81,14 @@ class Client
      */
     public function shipOrder($order, $notify = true, $appendComment = false)
     {
-        $orderId = $order['entity_id'];
+        $order_id = $order['entity_id'];
         $payload = [
             'items' => $this->getShipableOrderItems($order),
             'notify' => $notify,
             'appendComment' => $appendComment,
         ];
 
-        $response = $this->client->post($this->url("V1/order/{$orderId}/ship"), $payload);
+        $response = $this->client->post($this->url("V1/order/{$order_id}/ship"), $payload);
 
         return $response->json();
     }
