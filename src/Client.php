@@ -76,17 +76,24 @@ class Client
      * Create shipment for given order
      * @param  array   $order
      * @param  boolean $notify        send notification to customer
-     * @param  boolean $appendComment include comments in notification
+     * @param  string  $comment       add comment to shipment
+     * @param  boolean $notify        Notify the customer (0/1)
      * @return array                  response
      */
-    public function shipOrder($order, $notify = true, $appendComment = false)
+    public function shipOrder($order, $notify = true, $comment = null)
     {
         $order_id = $order['entity_id'];
         $payload = [
             'items' => $this->getShipableOrderItems($order),
             'notify' => $notify,
-            'appendComment' => $appendComment,
+            'appendComment' => !is_null($comment),
         ];
+        if ($comment !== null) {
+            $payload['comment'] = [
+                'comment' => $comment,
+                'is_visible_on_front' => 1,
+            ];
+        }
 
         $response = $this->client->post($this->url("V1/order/{$order_id}/ship"), $payload);
 
